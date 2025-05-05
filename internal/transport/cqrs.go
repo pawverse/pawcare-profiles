@@ -29,7 +29,7 @@ func NewEventBus(viper viper.Viper, logger *zap.Logger) (*cqrs.EventBus, error) 
 
 	eventBusConfig := cqrs.EventBusConfig{
 		GeneratePublishTopic: func(params cqrs.GenerateEventPublishTopicParams) (string, error) {
-			return "accounts." + params.EventName, nil
+			return "profiles." + params.EventName, nil
 		},
 
 		OnPublish: func(params cqrs.OnEventSendParams) error {
