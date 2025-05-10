@@ -1,18 +1,17 @@
 package server
 
 import (
-	v1 "profiles/api/helloworld/v1"
-	"profiles/internal/conf"
-	"profiles/internal/service"
-
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
+	v1 "github.com/pawverse/pawcare-profiles/api/helloworld/v1"
+	"github.com/pawverse/pawcare-profiles/internal/conf"
+	"github.com/pawverse/pawcare-profiles/internal/service"
 )
 
 // NewGRPCServer new a gRPC server.
 func NewGRPCServer(c *conf.Server, greeter *service.GreeterService, logger log.Logger) *grpc.Server {
-	var opts = []grpc.ServerOption{
+	opts := []grpc.ServerOption{
 		grpc.Middleware(
 			recovery.Recovery(),
 		),

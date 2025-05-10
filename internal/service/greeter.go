@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	v1 "profiles/api/helloworld/v1"
-	"profiles/internal/biz"
+	v1 "github.com/pawverse/pawcare-profiles/api/helloworld/v1"
+	"github.com/pawverse/pawcare-profiles/internal/biz"
 )
 
 // GreeterService is a greeter service.

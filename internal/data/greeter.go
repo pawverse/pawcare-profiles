@@ -3,9 +3,8 @@ package data
 import (
 	"context"
 
-	"profiles/internal/biz"
-
 	"github.com/go-kratos/kratos/v2/log"
+	"github.com/pawverse/pawcare-profiles/internal/biz"
 )
 
 type greeterRepo struct {

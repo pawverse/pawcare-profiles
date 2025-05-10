@@ -6,11 +6,11 @@
 package main
 
 import (
-	"profiles/internal/biz"
-	"profiles/internal/conf"
-	"profiles/internal/data"
-	"profiles/internal/server"
-	"profiles/internal/service"
+	"github.com/pawverse/pawcare-profiles/internal/biz"
+	"github.com/pawverse/pawcare-profiles/internal/conf"
+	"github.com/pawverse/pawcare-profiles/internal/data"
+	"github.com/pawverse/pawcare-profiles/internal/server"
+	"github.com/pawverse/pawcare-profiles/internal/service"
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
