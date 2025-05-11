@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package api.owners.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pawverse/pawcare-profiles/api/owners/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.owners.v1";
+
+service OwnerService {
+  rpc CreateOwner(CreateOwnerRequest) returns (CreateOwnerResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/owners"
+      body: "*"
+    };
+  }
+
+  rpc UpdateOwner(UpdateOwnerRequest) returns (UpdateOwnerResponse);
+  rpc DeleteOwner(DeleteOwnerRequest) returns (DeleteOwnerResponse);
+  rpc GetOwner(google.protobuf.Empty) returns (GetOwnerResponse) {
+    option (google.api.http) = {get: "/api/v1/owners"};
+  }
+}
+
+message CreateOwnerRequest {
+  string name = 1;
+  google.protobuf.Timestamp date_of_birth = 2;
+}
+message CreateOwnerResponse {
+  string id = 1;
+  string name = 2;
+  google.protobuf.Timestamp date_of_birth = 3;
+}
+
+message UpdateOwnerRequest {}
+message UpdateOwnerResponse {}
+
+message DeleteOwnerRequest {}
+message DeleteOwnerResponse {}
+
+message GetOwnerResponse {}
+
+message ListOwnerRequest {}
+message ListOwnerResponse {}

@@ -6,6 +6,8 @@
 package main
 
 import (
+	"context"
+
 	"github.com/pawverse/pawcare-profiles/internal/biz"
 	"github.com/pawverse/pawcare-profiles/internal/conf"
 	"github.com/pawverse/pawcare-profiles/internal/data"
@@ -18,6 +20,6 @@ import (
 )
 
 // wireApp init kratos application.
-func wireApp(*conf.Server, *conf.Data, log.Logger) (*kratos.App, func(), error) {
+func wireApp(context.Context, *conf.Server, *conf.Data, log.Logger) (*kratos.App, func(), error) {
 	panic(wire.Build(server.ProviderSet, data.ProviderSet, biz.ProviderSet, service.ProviderSet, newApp))
 }

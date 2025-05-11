@@ -1,11 +1,13 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"os"
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"
+	"github.com/go-kratos/kratos/v2/config/env"
 	"github.com/go-kratos/kratos/v2/config/file"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/tracing"
@@ -19,9 +21,9 @@ import (
 // go build -ldflags "-X main.Version=x.y.z"
 var (
 	// Name is the name of the compiled software.
-	Name string
+	Name = "profiles"
 	// Version is the version of the compiled software.
-	Version string
+	Version = "dev"
 	// flagconf is the config flag.
 	flagconf string
 
@@ -59,6 +61,7 @@ func main() {
 	)
 	c := config.New(
 		config.WithSource(
+			env.NewSource(""),
 			file.NewSource(flagconf),
 		),
 	)
@@ -73,7 +76,7 @@ func main() {
 		panic(err)
 	}
 
-	app, cleanup, err := wireApp(bc.Server, bc.Data, logger)
+	app, cleanup, err := wireApp(context.Background(), bc.Server, bc.Data, logger)
 	if err != nil {
 		panic(err)
 	}

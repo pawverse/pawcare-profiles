@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package api.pets.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pawverse/pawcare-profiles/api/pets/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.pets.v1";
+
+service PetService {
+  rpc CreatePet(CreatePetRequest) returns (CreatePetResponse) {
+    option (google.api.http) = {
+      post: "/v1/pets"
+      body: "*"
+    };
+  }
+
+  rpc UpdatePet(UpdatePetRequest) returns (UpdatePetResponse) {
+    option (google.api.http) = {
+      put: "/v1/pets"
+      body: "*"
+    };
+  }
+
+  rpc DeletePet(DeletePetRequest) returns (DeletePetResponse);
+  rpc GetPet(GetPetRequest) returns (GetPetResponse) {
+    option (google.api.http) = {get: "/v1/pets/{id}"};
+  }
+  rpc ListPet(ListPetRequest) returns (ListPetResponse);
+}
+
+message CreatePetRequest {
+  string name = 1;
+  string species = 2;
+  string breed = 3;
+  float weight = 4;
+  string gender = 5;
+  google.protobuf.Timestamp date_of_birth = 6;
+}
+message CreatePetResponse {
+  string id = 1;
+  string name = 2;
+}
+
+message UpdatePetRequest {}
+message UpdatePetResponse {}
+
+message DeletePetRequest {}
+message DeletePetResponse {}
+
+message GetPetRequest {
+  string id = 1;
+}
+message GetPetResponse {
+  string id = 1;
+  string name = 2;
+}
+
+message ListPetRequest {}
+message ListPetResponse {}

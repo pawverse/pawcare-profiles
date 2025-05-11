@@ -3,19 +3,80 @@
 
 openapi: 3.0.3
 info:
-    title: Greeter API
-    description: The greeting service definition.
+    title: ""
     version: 0.0.1
 paths:
-    /helloworld/{name}:
+    /api/v1/owners:
         get:
             tags:
-                - Greeter
-                - subgroup
-            description: Sends a greeting
-            operationId: Greeter_SayHello
+                - OwnerService
+            operationId: OwnerService_GetOwner
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.owners.v1.GetOwnerResponse'
+        post:
+            tags:
+                - OwnerService
+            operationId: OwnerService_CreateOwner
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.owners.v1.CreateOwnerRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.owners.v1.CreateOwnerResponse'
+    /v1/pets:
+        put:
+            tags:
+                - PetService
+            operationId: PetService_UpdatePet
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.pets.v1.UpdatePetRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.pets.v1.UpdatePetResponse'
+        post:
+            tags:
+                - PetService
+            operationId: PetService_CreatePet
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.pets.v1.CreatePetRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.pets.v1.CreatePetResponse'
+    /v1/pets/{id}:
+        get:
+            tags:
+                - PetService
+            operationId: PetService_GetPet
             parameters:
-                - name: name
+                - name: id
                   in: path
                   required: true
                   schema:
@@ -26,14 +87,67 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.HelloReply'
+                                $ref: '#/components/schemas/api.pets.v1.GetPetResponse'
 components:
     schemas:
-        helloworld.v1.HelloReply:
+        api.owners.v1.CreateOwnerRequest:
             type: object
             properties:
-                message:
+                name:
                     type: string
-            description: The response message containing the greetings
+                dateOfBirth:
+                    type: string
+                    format: date-time
+        api.owners.v1.CreateOwnerResponse:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                dateOfBirth:
+                    type: string
+                    format: date-time
+        api.owners.v1.GetOwnerResponse:
+            type: object
+            properties: {}
+        api.pets.v1.CreatePetRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+                species:
+                    type: string
+                breed:
+                    type: string
+                weight:
+                    type: number
+                    format: float
+                gender:
+                    type: string
+                dateOfBirth:
+                    type: string
+                    format: date-time
+        api.pets.v1.CreatePetResponse:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+        api.pets.v1.GetPetResponse:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+        api.pets.v1.UpdatePetRequest:
+            type: object
+            properties: {}
+        api.pets.v1.UpdatePetResponse:
+            type: object
+            properties: {}
 tags:
-    - name: Greeter
+    - name: OwnerService
+    - name: PetService
